@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta content="yes" name="apple-mobile-web-app-capable">
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+<meta content="no-cache,no-store,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-siteapp" http-equiv="Cache-Control"/>
+<meta content="0" http-equiv="expires">
+<meta content="telephone=no, address=no" name="format-detection">
+<link href="public/css/reset.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="public/js/jquery-1.7.2-min.js"></script>
+<script type="text/javascript" src="public/js/define.js"></script>
+<script type="text/javascript" src="public/js/freshpage.js"></script><!-- 刷新 -->
+<script type="text/javascript" src="public/js/Dialog.js"></script><!--弹窗 -->
+<script type="text/javascript" src="public/js/MyAudio.js"></script><!-- 音频 -->
+<script type="text/javascript" src="public/js/requestAnimationFrame.js"></script><!-- 动画 -->
+<title>xxxxx</title>
+<{include file="index_css.html"}>
+</head>
+<body>
+	<!-- loadding -->
+    <div id="loading_main" style="background:url(<{$imgArr.loading}>) no-repeat;background-size:100% auto;">
+		<p>Loading 0%</p>
+	</div>
+    <!-- 音乐 -->
+    <img id="music_img" src="<{$imgArr.music}>" onClick="controllMusic();"/>
+	<!--  首页 -->
+    <div id="home_main" style="background:url(<{$imgArr.home_bg}>) no-repeat;background-size:100% auto;">
+        <span class="hm_startBtn" onclick="clickFn(3)"></span>
+        <span class="hm_ruleBtn" onclick="clickFn(1)"></span>
+    </div>
+     <!-- 规则页 -->
+    <div id="rule_main">
+        <img src="<{$imgArr.rule_bg}>" id="rule">
+        <span class="rm_closeBtn" onclick="clickFn(2)"></span>
+    </div>
+     <!-- 游戏页 -->
+    <div id="game_main"  style="background:url(<{$imgArr.game_bg}>) no-repeat;background-size:100% auto;">
+        <img src="<{$imgArr.circle_bg}>" id="circle_main">
+        <div id="center"></div>
+        <canvas id="canvas">您的浏览器不支持 canvas 标签</canvas>
+    </div>
+    <!-- 结果页 -->
+    <div id="result_main">
+        <img src="<{$imgArr.result1}>" id="result1" class="com">
+        <img src="<{$imgArr.result2}>" id="result2" class="com">
+        <img src="<{$imgArr.result3}>" id="result3" class="com">
+        <span class="rm_prizeBtn" onclick="clickFn(4)"></span>
+    </div>
+    <!-- 结果页——风力不足 -->
+    <div id="result0_main">
+        <img src="<{$imgArr.result0}>" id="resultbg">
+        <img src="<{$imgArr.result0_1}>" id="result0_1" class="com">
+        <img src="<{$imgArr.result0_2}>" id="result0_2" class="com">
+        <img src="<{$imgArr.result0_3}>" id="result0_3" class="com">
+        <span class="rm_againBtn" onclick="clickFn(5)"></span>
+    </div>
+    <!-- 中奖页 -->
+    <div id="prize_main">
+         <div id="prize1"  style="background:url(<{$imgArr.prize1}>) no-repeat;background-size:100% auto;">
+            <input type="text" class="pm_name" id="pm_name" placeHolder="姓名"></input>
+            <input type="text" class="pm_phone" id="pm_phone" placeHolder="电话"></input>
+            <input type="text" class="pm_address" id="pm_address" placeHolder="地址"></input>
+            <span class="pm_sureBtn" onclick="clickFn(6)"></span>
+        </div>
+        <img src="<{$imgArr.prize0}>" id="prize0">
+        <span class="pm_againBtn" onclick="clickFn(5)"></span>
+    </div>
+    <!-- 提交页面 -->
+    <div id="submit_main">
+        <img src="<{$imgArr.submit}>" id="submit">
+        <span class="sm_sureBtn" onclick="clickFn(5)"></span>
+    </div>
+   
+
+    
+
+</body>
+</html>
+<{include file="index_js.html"}>

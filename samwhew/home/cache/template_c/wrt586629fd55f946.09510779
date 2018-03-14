@@ -1,0 +1,293 @@
+<?php /* Smarty version Smarty-3.1.14, created on 2016-12-30 09:33:49
+         compiled from "E:\website\project\proj3\home\views\index_js.html" */ ?>
+<?php /*%%SmartyHeaderCode:43025865f3dc226039-97801368%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '907f9746c91c57e09078a7d7ff121a0fffe273f2' => 
+    array (
+      0 => 'E:\\website\\project\\proj3\\home\\views\\index_js.html',
+      1 => 1483090427,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '43025865f3dc226039-97801368',
+  'function' => 
+  array (
+  ),
+  'version' => 'Smarty-3.1.14',
+  'unifunc' => 'content_5865f3dc241536_26084619',
+  'variables' => 
+  array (
+    'imgArr' => 0,
+  ),
+  'has_nocache_code' => false,
+),false); /*/%%SmartyHeaderCode%%*/?>
+<?php if ($_valid && !is_callable('content_5865f3dc241536_26084619')) {function content_5865f3dc241536_26084619($_smarty_tpl) {?><script type="text/javascript">
+    (function(win){//立即执行函数
+        define({
+            'mw':$(win).width(),
+            'mh':$(win).height(),//屏幕宽高
+            'ph':(($(win).width())*1334)/750,
+            'w0':(750*($(win).height()))/1334,
+            'rh':(($(win).width())*665)/750,
+           
+            'loadFlag':false,//页面是否加载完：默认没有
+            'gameArr':[],//图片数组
+            'checkloadok_flag':false//图片是否加载完：默认没有
+        });
+        
+        var gameImgArr = ['<?php echo $_smarty_tpl->tpl_vars['imgArr']->value['home_bg'];?>
+','<?php echo $_smarty_tpl->tpl_vars['imgArr']->value['rule_bg'];?>
+','<?php echo $_smarty_tpl->tpl_vars['imgArr']->value['game_bg'];?>
+','<?php echo $_smarty_tpl->tpl_vars['imgArr']->value['circle_bg'];?>
+'];
+        win.onload = function(){
+            loadgameimg();
+            imgLoader(['<?php echo $_smarty_tpl->tpl_vars['imgArr']->value['home_bg'];?>
+','<?php echo $_smarty_tpl->tpl_vars['imgArr']->value['rule_bg'];?>
+','<?php echo $_smarty_tpl->tpl_vars['imgArr']->value['game_bg'];?>
+','<?php echo $_smarty_tpl->tpl_vars['imgArr']->value['circle_bg'];?>
+'], function(percentage){
+                if(percentage>=1){//加载完成
+                    checkloadok();
+                }
+                $('#loading_main p').html('Loading '+parseInt(percentage*100)+'%');
+            });
+           
+
+            /*首页*/
+            $('#home_main').width(mw).height(mh);
+            $('#home_main>span').width(mw*0.42).height(ph*0.07);
+            $('#home_main .hm_startBtn').css({left:mw*0.29,top:ph*0.66});
+            $('#home_main .hm_ruleBtn').css({left:mw*0.29,top:ph*0.73});
+            // 规则页
+            $('#rule_main').width(mw).height(ph);
+            $('#rule_main .rm_closeBtn').width(mw*0.42).height(ph*0.07).css({left:mw*0.29,top:ph*0.74});
+            //游戏页
+            $('#game_main').width(mw).height(ph);
+            $('#circle_main').width(mw).height(rh).css('top',ph*0.2);
+
+            var canvas=document.getElementById("canvas");
+    var context=canvas.getContext("2d");
+    canvas.width = mw;
+    canvas.height = mw;
+    var x = mw/2;   //圆心的x轴坐标值
+    var y = mw/2;    //圆心的y轴坐标值
+    var r = 0;   //圆的半径
+    function drawPoint(){
+        context.fillStyle="#eee";  
+        context.beginPath();        
+        context.arc(x,y,r,0,Math.PI*2,true);
+
+        context.closePath();      
+        context.fill(); 
+
+    }   
+    
+    
+
+    
+    // var a ; //动画
+    // var c1=$('#circle1').width()/2;
+    // var c2=$('#circle2').width()/2;
+    // var c3=$('#circle3').width()/2;
+    // var flag = true; // 切换条件
+    // function animates(){
+    //     if (flag){
+    //         context.clearRect(0, 0, canvas.width, canvas.height);
+    //         r+=2;
+    //         drawPoint();
+    //         if (r > c3) {
+    //             flag = false;
+    //         }
+    //     }else{
+    //         context.clearRect(0, 0, canvas.width, canvas.height);
+    //         r-=2;
+    //         drawPoint();
+    //         if (r <= 0) {
+    //             flag = true;
+    //         }
+    //     }
+    //     console.log(r);
+    //     a = requestAnimationFrame(animates);        
+    // }
+
+    // var i;
+    // function selectFn(){
+    //     if( i < c1+10 && i > c1-10){
+    //         alert("父母");
+    //     }else if(i < c2+10 && i > c2-10){
+    //         alert('孩子')
+    //     }else if(i < c3+10 && i > c3-10){
+    //         alert("家人");
+    //     }
+    // }
+    
+    // 触屏滑动
+    $('#circle_main').on('touchstart',function(e){
+        e.preventDefault(); //阻止触摸时浏览器的缩放、滚动条滚动等  
+        var touch = e.originalEvent.targetTouches[0]; ; //获取第一个触点  
+        var x = Number(touch.pageX); //页面触点X坐标   
+        //记录触点初始位置  
+        startX = x;  
+        drawPoint();
+     })
+     $('#circle_main').on('touchend',function(e){
+        e.preventDefault();
+        // canvas.hide();
+    })
+            
+           
+
+            $('#game_main,#circle_main').show();
+            loadFlag = true;
+            
+        }
+        //游戏页
+        var canvas=document.getElementById("canvas");
+        var context=canvas.getContext("2d");
+        canvas.width = mw;
+        canvas.height = mh;
+        var x = mw/2;   //圆心的x轴坐标值
+        var y = rh/2+ph*0.2;    //圆心的y轴坐标值
+        var r = 160;   //圆的半径
+        var a ; //动画
+        var flag = true; // 切换条件     
+        function drawPoint(){
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle="#f58d30";  
+            context.beginPath();        
+            context.arc(x,y,r,0,Math.PI*2,true);
+            context.closePath();      
+            context.fill(); 
+        }   
+        // // 空调风（圆）-扩大缩小
+        // // var j = 10;
+        // function animates(){
+        //     // var max = c3+j;//边缘最大值
+        //     var max = 120;//边缘最大值
+        //     context.clearRect(0, 0, canvas.width, canvas.height);
+        //     if(flag){
+        //         r+=0.5;
+        //         drawPoint();
+        //         if(r==max){
+        //             flag = false;
+        //         }
+        //     }else{
+        //         r-=0.5;
+        //         drawPoint();
+        //         if(r==0){
+        //             flag = true;
+        //         }
+        //     }
+        //     // console.log(r,c1,c2,c3,x,y)
+        //     a = requestAnimationFrame(animates);        
+        // }
+        // win.touch= function(event){
+        //     var event = event || window.event;
+        //     switch(event.type){
+        //         case "touchstart":
+        //         alert("message");
+        //             event.preventDefault(); //阻止触摸时浏览器的缩放、滚动条滚动等  
+        //             var touch = event.originalEvent.targetTouches[0]; ; //获取第一个触点  
+        //             var x = Number(touch.pageX); //页面触点X坐标   
+        //             //记录触点初始位置  
+        //             startX = x;  
+        //            drawPoint();
+        //             break;
+        //         case "touchend":
+        //             event.preventDefault();
+        //             canvas.style.display="hide";
+        //             // cancelAnimationFrame(a);
+        //             // i = r;
+        //             // selectFn();
+        //             break;
+        //     }
+        // }
+
+
+        win.clickFn = function(n){
+            switch(n){
+                case 1: $('#rule_main').show();
+                break;
+                case 2: $('#rule_main').hide();
+                break;
+            }
+        }
+        
+        //定时查看游戏部分图片是否加载完成，完成就初始化游戏
+        function checkloadok(){
+            if(checkloadok_flag && loadFlag){
+              $('#loading_main').hide();
+              return;
+            }
+            var count0 = 0;
+            for(var i=0;i<gameArr.length;i++){
+              if(gameArr[i].complete){
+                count0 +=1;
+              }
+            }
+            if(gameArr.length==count0){
+              checkloadok_flag = true;
+            }
+            requestAnimationFrame(checkloadok);
+        }
+
+        //加载游戏图片
+        win.loadgameimg = function(){
+            var tempArr = new Array();
+            for(var i=0;i<gameImgArr.length;i++){
+              tempArr[i] = new Image();
+              tempArr[i].src = gameImgArr[i];
+              gameArr.push(tempArr[i]);
+            }
+        }
+
+        //随机数
+        function random(min,max){
+            return Math.floor(Math.random()*(max-min+1)+min);
+        }
+    }(window)); 
+
+
+    (function () {    
+        function isArray(obj) {    
+            return Object.prototype.toString.call(obj) === '[object Array]';    
+        }    
+        /**   
+        * @param imgList 要加载的图片地址列表，['aa/asd.png','aa/xxx.png']   
+        * @param callback 每成功加载一个图片之后的回调，并传入“已加载的图片总数/要加载的图片总数”表示进度   
+        * @param timeout 每个图片加载的超时时间，默认为5s   
+        */    
+        var loader = function (imgList, callback, timeout) {    
+            timeout = timeout || 5000;    
+            imgList = isArray(imgList) && imgList || [];    
+            callback = typeof(callback) === 'function' && callback;    
+            var total = imgList.length,    
+            loaded = 0,    
+            imgages = [],    
+            _on = function () {    
+                loaded < total && (++loaded, callback && callback(loaded / total));    
+            };    
+            if (!total) {    
+                return callback && callback(1);    
+            }    
+            for (var i = 0; i < total; i++) {    
+                imgages[i] = new Image();    
+                imgages[i].onload = imgages[i].onerror = _on;    
+                imgages[i].src = imgList[i];    
+            }    
+            /**   
+            * 如果timeout * total时间范围内，仍有图片未加载出来（判断条件是loaded < total），通知外部环境所有图片均已加载   
+            * 目的是避免用户等待时间过长   
+            */    
+            setTimeout(function () {    
+                loaded < total && (loaded = total, callback && callback(loaded / total));    
+            }, timeout * total);    
+        };    
+        "function" === typeof define && define.cmd ? define(function () {    
+            return loader    
+        }) : window.imgLoader = loader;    
+    })();  
+</script><?php }} ?>
